@@ -72,3 +72,40 @@ function checkPastLimitSimplified(limiter) {
 }
 
 const arr1 = mapForEach([1, 2, 3], checkPastLimitSimplified(1));
+
+const proto = {
+  prop1: 1,
+  prop2: 2,
+  getAllProps() {
+    return `${this.prop1} ${this.prop2}`;
+  }
+};
+
+const other = {
+  prop1: 3
+};
+
+other.__proto__ = proto;
+
+const a = {};
+const b = function() {
+  console.log(this);
+};
+const c = [];
+
+for (let prop in other) {
+  if (other.hasOwnProperty(prop)) {
+  }
+}
+
+function Person() {
+  console.log(this);
+  this.firstName = "John";
+  this.lastName = "Doe";
+}
+
+Person.prototype.getFullname = () => {
+  `${this.firstName} ${this.lastName}`;
+};
+
+const john = new Person();
