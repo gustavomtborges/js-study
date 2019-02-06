@@ -88,9 +88,7 @@ const other = {
 other.__proto__ = proto;
 
 const a = {};
-const b = function() {
-  console.log(this);
-};
+const b = function() {};
 const c = [];
 
 for (let prop in other) {
@@ -99,13 +97,39 @@ for (let prop in other) {
 }
 
 function Person() {
-  console.log(this);
   this.firstName = "John";
   this.lastName = "Doe";
 }
 
-Person.prototype.getFullname = () => {
-  `${this.firstName} ${this.lastName}`;
+function Animal() {}
+
+Animal.prototype = Person;
+
+Person.prototype.getFullname = function() {
+  return `${this.firstName} ${this.lastName}`;
 };
 
 const john = new Person();
+const dog = new Animal();
+
+String.prototype.isGreaterThan = function(limiter) {
+  return this.length > limiter;
+};
+
+Number.prototype.isPositive = function() {
+  return this > 0;
+};
+
+let person2 = Object.create(new Person());
+
+class PersonClass {
+  constructor(name) {
+    this.name = "John";
+  }
+
+  greet() {
+    return `Hi ${name}`;
+  }
+}
+
+let person3 = new PersonClass("john");
